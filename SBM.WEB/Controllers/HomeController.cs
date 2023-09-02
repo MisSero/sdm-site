@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SBM.WEB.Controllers
+namespace SDM.WEB.Controllers
 {
     public class HomeController : Controller
     {

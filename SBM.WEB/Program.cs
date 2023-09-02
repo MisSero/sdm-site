@@ -1,25 +1,26 @@
-namespace SBM.WEB
+using SDM.WEB.Service;
+
+namespace SDM.WEB;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllersWithViews();
+        builder.Services.AddControllersWithViews();
 
+        builder.Configuration.Bind("Project", new Config());
 
-            var app = builder.Build();
+        var app = builder.Build();
 
-            app.UseRouting();
+        app.UseRouting();
+        app.UseStaticFiles();
 
-            app.UseStaticFiles();
+        app.MapControllerRoute(
+            name: "defatul",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            app.MapControllerRoute(
-                name: "defatul",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-        }
+        app.Run();
     }
 }
