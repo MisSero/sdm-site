@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using SDM.DAL.EF;
 using SDM.DAL.Interfaces;
 using SDM.DAL.Repositories;
 using SDM.WEB.Service;
+using SDM.WEB.Services;
 
 namespace SDM.WEB;
 
@@ -13,8 +13,6 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        builder.Services.AddControllersWithViews();
 
         builder.Configuration.Bind("Project", new Config());
 
@@ -45,6 +43,19 @@ public class Program
             options.SlidingExpiration = true;
         });
 
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminArea", policy => 
+            {
+                policy.RequireRole("admin"); 
+            });
+        });
+
+        builder.Services.AddControllersWithViews(options =>
+        {
+            options.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
+        });
+
         var app = builder.Build();
 
         app.UseRouting();
@@ -58,6 +69,9 @@ public class Program
         app.MapControllerRoute(
             name: "defatul",
             pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapControllerRoute(
+            name: "admin",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}");
 
         app.Run();
     }
