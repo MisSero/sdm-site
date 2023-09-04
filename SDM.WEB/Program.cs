@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SDM.BLL.Interfaces;
+using SDM.BLL.Services;
 using SDM.DAL.EF;
 using SDM.DAL.Interfaces;
 using SDM.DAL.Repositories;
@@ -23,6 +25,7 @@ public class Program
 
         builder.Services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
         builder.Services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
+        builder.Services.AddTransient<IServiceItemsService, ServiceItemsService>();
 
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
         {
