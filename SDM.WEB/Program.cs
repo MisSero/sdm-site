@@ -26,6 +26,7 @@ public class Program
         builder.Services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
         builder.Services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
         builder.Services.AddTransient<IServiceItemsService, ServiceItemsService>();
+        builder.Services.AddTransient<ITextFieldsService, TextFieldsService>();
 
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
         {
