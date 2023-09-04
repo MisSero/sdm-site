@@ -14,6 +14,5 @@ public abstract class EntityBase
 	public virtual string? MetaTitle { get; set; }
 	public virtual string? MetaDescription{ get; set; }
 	public virtual string? MetaKeywords { get; set; }
-	[DataType(DataType.Time)]
 	public DateTime DateAdded { get; set; }
 }
