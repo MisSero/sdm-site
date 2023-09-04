@@ -24,7 +24,7 @@ public class EFServiceItemsRepository : IServiceItemsRepository
 		return await _db.ServiceItems.FirstOrDefaultAsync(si => si.Id == id);
 	}
 
-	public async void Save(ServiceItem serviceItem)
+	public async Task Save(ServiceItem serviceItem)
 	{
 		if (serviceItem.Id == default)
 			_db.Entry(serviceItem).State = EntityState.Added;
@@ -33,7 +33,7 @@ public class EFServiceItemsRepository : IServiceItemsRepository
 		await _db.SaveChangesAsync();
 	}
 
-    public async void Delete(Guid id)
+    public async Task Delete(Guid id)
 	{
 		_db.ServiceItems.Remove(new ServiceItem { Id = id });
 		await _db.SaveChangesAsync();
