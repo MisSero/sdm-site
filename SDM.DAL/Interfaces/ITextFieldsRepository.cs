@@ -7,6 +7,6 @@ public interface ITextFieldsRepository
 	IQueryable<TextField> GetAll();
 	Task<TextField> GetById(Guid id);
 	Task<TextField> GetByCodeWord(string codeWord);
-	void Save(TextField textField);
+	Task Save(TextField textField);
 	void Delete(Guid id);
 }

@@ -29,7 +29,7 @@ public class EFTextFieldsRepository : ITextFieldsRepository
 		return await _db.TextFields.FirstOrDefaultAsync(tf => tf.CodeWord == codeWord);
 	}
 
-	public async void Save(TextField textField)
+	public async Task Save(TextField textField)
 	{
 		if (textField.Id == default)
 			_db.Entry(textField).State = EntityState.Added;
